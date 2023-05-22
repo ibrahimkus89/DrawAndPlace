@@ -11,6 +11,10 @@ public class DrawLine : MonoBehaviour
 
      Camera _camera;
      private int fingerPosIndex;
+     private bool _LineStart;
+
+     private RaycastHit2D hit;
+     public string _Tag;
     void Start()
     {
         _camera = Camera.main;
@@ -20,22 +24,48 @@ public class DrawLine : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0) && !_LineStart)
+        //{
+        //    CreateLine();
+        //    _LineStart =true;;
+        //}
+
+
+        //if (Input.GetMouseButton(0))
+        //{
+        //    Vector2 fingerPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+
+        //    if (Vector2.Distance(fingerPos, fingerPosList[^1]) >.1f)
+        //    {
+        //        UpdateTheLine(fingerPos);
+        //    }
+        //}
+
+        hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,-10)),Vector2.zero);
+
+        if (hit.collider != null)
         {
-            CreateLine();
+            if (hit.collider.gameObject.CompareTag(_Tag) && !_LineStart && Input.GetMouseButtonDown(0))
+            {
+                CreateLine();
+                _LineStart = true;
+            }
         }
 
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && _LineStart)
         {
             Vector2 fingerPos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Vector2.Distance(fingerPos, fingerPosList[^1]) >.1f)
+            if (Vector2.Distance(fingerPos, fingerPosList[^1]) > .1f)
             {
                 UpdateTheLine(fingerPos);
             }
         }
 
+        if (Input.GetMouseButtonUp(0) && _LineStart)
+        {
+            enabled=false;
+        }
     }
 
     void CreateLine()

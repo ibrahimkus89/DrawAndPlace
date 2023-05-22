@@ -14,13 +14,13 @@ public class Socket : MonoBehaviour
         if (place)
         {
 
-            if (Vector2.Distance(transform.position, Generalmanagement._GameManager._drawLine[0].LastPosition()) > .1f)
+            if (Vector2.Distance(transform.position, Generalmanagement._GameManager._drawLine[LineIndex].LastPosition()) > .1f)
             {
-                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[0].LastPosition(),.2f);
+                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[LineIndex].LastPosition(),.2f);
             }
             else
             {
-                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[0].NextPosition(),.2f);
+                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[LineIndex].NextPosition(),.2f);
 
             }
 
