@@ -7,7 +7,7 @@ public class DrawLine : MonoBehaviour
 {
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private List<Vector2> fingerPosList;
-     //public Socket _socket;
+    [SerializeField] Socket _socket;
 
      Camera _camera;
     void Start()
