@@ -1224,6 +1224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8add93c6553d64d88ae72a89d60b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawLine:
+  - {fileID: 1549809165}
 --- !u!4 &1549809167
 Transform:
   m_ObjectHideFlags: 0

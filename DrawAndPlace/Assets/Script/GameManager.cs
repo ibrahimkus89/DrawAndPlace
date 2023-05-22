@@ -1,18 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityProject;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public DrawLine[] _drawLine;
+
+    private Generalmanagement _Generalmanagement;
+
+    void Awake()
+    {
+        _Generalmanagement = new(this);
+    }
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            foreach (var item in _drawLine)
+            {
+                item.Startt();
+            }
+        }
+
     }
 }

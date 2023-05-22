@@ -10,6 +10,7 @@ public class DrawLine : MonoBehaviour
     [SerializeField] Socket _socket;
 
      Camera _camera;
+     private int fingerPosIndex;
     void Start()
     {
         _camera = Camera.main;
@@ -52,5 +53,35 @@ public class DrawLine : MonoBehaviour
         fingerPosList.Add(incomingFingerPos);
         _lineRenderer.positionCount++;
         _lineRenderer.SetPosition(_lineRenderer.positionCount-1,incomingFingerPos);
+    }
+
+
+    public void Startt()
+    {
+        _socket.place = true;
+
+    }
+
+    public Vector2 LastPosition()
+    {
+        return fingerPosList[fingerPosIndex];
+    }
+
+    public Vector2 NextPosition()
+    {
+        if (fingerPosIndex == fingerPosList.Count -1)
+        {
+            _socket.place =false;
+            return fingerPosList[fingerPosIndex];
+        }
+        else
+        {
+            fingerPosIndex++;
+            return fingerPosList[fingerPosIndex];
+
+        }
+
+        
+
     }
 }
