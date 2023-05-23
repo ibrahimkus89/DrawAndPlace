@@ -9,6 +9,10 @@ TagManager:
   - Start2
   - Start3
   - Start4
+  - Obstacle
+  - Green
+  - Red
+  - Blue
   layers:
   - Default
   - TransparentFX

@@ -88,7 +88,7 @@ public class DrawLine : MonoBehaviour
 
     public void Startt()
     {
-        _socket.place = true;
+        _socket._place = true;
 
     }
 
@@ -101,7 +101,7 @@ public class DrawLine : MonoBehaviour
     {
         if (fingerPosIndex == fingerPosList.Count -1)
         {
-            _socket.place =false;
+            _socket._place =false;
             return fingerPosList[fingerPosIndex];
         }
         else
