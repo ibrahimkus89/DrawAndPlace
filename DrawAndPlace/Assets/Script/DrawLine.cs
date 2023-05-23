@@ -50,6 +50,12 @@ public class DrawLine : MonoBehaviour
                 CreateLine();
                 _LineStart = true;
             }
+
+            if (hit.collider.CompareTag("Obstacle"))
+            {
+                _LineStart =false;
+               
+            }
         }
 
         if (Input.GetMouseButton(0) && _LineStart)
