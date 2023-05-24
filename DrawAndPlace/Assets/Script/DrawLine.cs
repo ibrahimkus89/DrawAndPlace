@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityProject;
 
 public class DrawLine : MonoBehaviour
 {
-    [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private List<Vector2> fingerPosList;
-    [SerializeField] Socket _socket;
+    public LineRenderer _lineRenderer;
+    public List<Vector2> fingerPosList;
+    public Socket _socket;
+    public string _Tag;
 
      Camera _camera;
      private int fingerPosIndex;
      private bool _LineStart;
-
      private RaycastHit2D hit;
-     public string _Tag;
     void Start()
     {
         _camera = Camera.main;
@@ -51,11 +51,14 @@ public class DrawLine : MonoBehaviour
                 _LineStart = true;
             }
 
-            if (hit.collider.CompareTag("Obstacle"))
+            if (hit.collider.CompareTag("Obstacle") && _LineStart)
             {
                 _LineStart =false;
-               
+                Generalmanagement._GameManager.TheLineisOver();
+
+
             }
+
         }
 
         if (Input.GetMouseButton(0) && _LineStart)
@@ -71,6 +74,8 @@ public class DrawLine : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && _LineStart)
         {
             enabled=false;
+            _LineStart = false;
+            Generalmanagement._GameManager.TheLineisOver();
         }
     }
 

@@ -7,12 +7,12 @@ using UnityProject;
 public class Socket : MonoBehaviour
 {
     public bool _place;
-    [SerializeField] private int _LineIndex;
-    [SerializeField] private string _socketColor;
+    public int _LineIndex;
+    public string _socketColor;
+    public GameObject _arrivalYuv;
 
-     bool _yuvOt;
+    bool _yuvOt;
      private Vector2 _yuvPosition;
-     [SerializeField] private GameObject _arrivalYuv;
     void Update()
     {
 
@@ -53,6 +53,7 @@ public class Socket : MonoBehaviour
             //Debug.Log("doðru renk" +_socketColor);
             _yuvOt =true;
             _yuvPosition = _arrivalYuv.transform.position;
+            Generalmanagement._GameManager.SocketOtr();
 
             //Optional
             //GetComponent<CircleCollider2D>().enabled = false;
