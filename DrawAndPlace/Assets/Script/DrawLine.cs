@@ -7,7 +7,7 @@ using UnityProject;
 public class DrawLine : MonoBehaviour
 {
     public LineRenderer _lineRenderer;
-    public List<Vector2> fingerPosList;
+    public List<Vector2> fingerPosList =new();
     public Socket _socket;
     public string _Tag;
 
