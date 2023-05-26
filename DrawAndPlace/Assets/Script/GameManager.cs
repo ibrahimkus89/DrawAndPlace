@@ -8,18 +8,17 @@ using UnityProject;
 
     public class GameManager : MonoBehaviour
     {
+        [Header("---GENERAL OBJECTS")]
         public List<DrawLine> _drawLine;
-
-        private Generalmanagement _Generalmanagement;
         [SerializeField] private int _topObjnumber;
+        [SerializeField] private GameObject[] _Panels;
 
-        private bool timeStart;
-        private int _totalGirSocketNum;
-
-        
+        [Header("---AUTO LEVEL")]
         [SerializeField] List<AutoLevel> _AutoLevel;
-        
-    
+
+       private Generalmanagement _Generalmanagement;
+       private bool timeStart;
+       private int _totalGirSocketNum;
 
     void Awake()
         {
@@ -67,14 +66,19 @@ using UnityProject;
     }
 
 
-        void Update()
+        void TurnOnPanel(int Indexx)
         {
-
-
+        _Panels[Indexx].SetActive(true);
 
         }
 
-        void Win()
+     void TurnOffPanel(int Indexx)
+     {
+        _Panels[Indexx].SetActive(false);
+
+     }
+
+    void Win()
         {
             Debug.Log("Win");
         }
@@ -82,6 +86,17 @@ using UnityProject;
         void Lost()
         {
             Debug.Log("Lost");
+        }
+
+        public void ButtonTechPro(string Process)
+        {
+            switch (Process)
+            {
+             case "Pause":
+                 TurnOnPanel(0);
+                 Time.timeScale = 0;
+                break;
+            }
         }
 
         void Begin()
