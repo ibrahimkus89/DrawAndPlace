@@ -61,15 +61,17 @@ public class Socket : MonoBehaviour
 
         else if (collision.CompareTag("Socket"))
         {
-            //Debug.Log("baþka renk" + _socketColor);
+            
             _place = false;
+            Generalmanagement._GameManager.Lost();
         }
         else
         {
             if (!collision.CompareTag(Generalmanagement._GameManager._drawLine[_LineIndex]._Tag))
             {
                 _place = false;
-                //Debug.Log("Game Over" + collision.gameObject.name);
+                 Generalmanagement._GameManager.Lost();
+
 
             }
         }

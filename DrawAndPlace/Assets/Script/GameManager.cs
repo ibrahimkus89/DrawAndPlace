@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityProject;
+using UnityEngine.SceneManagement;
 
 
     public class GameManager : MonoBehaviour
@@ -12,6 +14,7 @@ using UnityProject;
         public List<DrawLine> _drawLine;
         [SerializeField] private int _topObjnumber;
         [SerializeField] private GameObject[] _Panels;
+        [SerializeField] private TextMeshProUGUI _scoreText;
 
         [Header("---AUTO LEVEL")]
         [SerializeField] List<AutoLevel> _AutoLevel;
@@ -19,15 +22,17 @@ using UnityProject;
        private Generalmanagement _Generalmanagement;
        private bool timeStart;
        private int _totalGirSocketNum;
-
-    void Awake()
+       private int _sceneIndex;
+         void Awake()
         {
             _Generalmanagement = new(this);
             _totalGirSocketNum = _topObjnumber;
+            _scoreText.text = MemoryManager.ReadDataInt("Score").ToString();
         }
 
         void Start()
         {
+            _sceneIndex = SceneManager.GetActiveScene().buildIndex;
             for (int i = 0; i <_AutoLevel[0]._StartObjects.Count; i++)
             {
                 _AutoLevel[0]._StartObjects[i]._startObject.tag = "Start" + (i+1);
@@ -78,25 +83,59 @@ using UnityProject;
 
      }
 
-    void Win()
+       void Win()
         {
-            Debug.Log("Win");
+            
+            TurnOnPanel(1);
+            MemoryManager.SaveDataInt("Level",_sceneIndex+1);
+            MemoryManager.SaveDataInt("Score",MemoryManager.ReadDataInt("Score")+50);
+            _scoreText.text = MemoryManager.ReadDataInt("Score").ToString();
+            Time.timeScale = 0;
+
+       }
+
+         public void Lost()
+        {
+            TurnOnPanel(2); 
+            Time.timeScale = 0;
         }
 
-        void Lost()
+    public void ButtonTech(string Pro)
         {
-            Debug.Log("Lost");
-        }
-
-        public void ButtonTechPro(string Process)
-        {
-            switch (Process)
+            switch (Pro)
             {
-             case "Pause":
-                 TurnOnPanel(0);
-                 Time.timeScale = 0;
+              case "Pause":
+                TurnOnPanel(0);
+                Time.timeScale = 0;
                 break;
-            }
+
+              case "Resume":
+                  TurnOffPanel(0);
+                  Time.timeScale = 1;
+                  break;
+
+              case "Again":
+                  SceneManager.LoadScene(_sceneIndex);
+                  Time.timeScale = 1;
+                  break;
+              case "NextLevel":
+                  SceneManager.LoadScene(_sceneIndex+1);
+                  Time.timeScale = 1;
+                  break;
+
+              case "Exit":
+                 TurnOnPanel(3);
+                  break;
+
+              case "Yes":
+                  Application.Quit();
+                  break;
+
+              case "No":
+                  TurnOffPanel(3);
+                  break;
+        }
+
         }
 
         void Begin()
