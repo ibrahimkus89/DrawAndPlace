@@ -15,6 +15,7 @@ TagManager:
   - Blue
   - Socket
   - Purple
+  - GameSound
   layers:
   - Default
   - TransparentFX

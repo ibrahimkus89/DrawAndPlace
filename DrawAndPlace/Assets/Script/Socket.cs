@@ -64,6 +64,8 @@ public class Socket : MonoBehaviour
             
             _place = false;
             Generalmanagement._GameManager.Lost();
+            Generalmanagement._GameManager.PlaySound(3);
+
         }
         else
         {
@@ -71,6 +73,7 @@ public class Socket : MonoBehaviour
             {
                 _place = false;
                  Generalmanagement._GameManager.Lost();
+                 Generalmanagement._GameManager.PlaySound(3);
 
 
             }
