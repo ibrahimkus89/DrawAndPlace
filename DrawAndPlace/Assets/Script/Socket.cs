@@ -21,11 +21,11 @@ public class Socket : MonoBehaviour
 
             if (Vector2.Distance(transform.position, Generalmanagement._GameManager._drawLine[_LineIndex].LastPosition()) > .1f)
             {
-                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[_LineIndex].LastPosition(),.2f);
+                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[_LineIndex].LastPosition(),30 *Time.deltaTime);
             }
             else
             {
-                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[_LineIndex].NextPosition(),.2f);
+                transform.position = Vector2.Lerp(transform.position, Generalmanagement._GameManager._drawLine[_LineIndex].NextPosition(), 30 * Time.deltaTime);
 
             }
 
@@ -35,7 +35,7 @@ public class Socket : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, _yuvPosition) > .1f)
             {
-                transform.position = Vector2.Lerp(transform.position, _yuvPosition, .2f);
+                transform.position = Vector2.Lerp(transform.position, _yuvPosition, 30 * Time.deltaTime);
             }
             else
             {

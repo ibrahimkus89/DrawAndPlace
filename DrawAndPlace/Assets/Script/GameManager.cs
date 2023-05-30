@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -213,7 +212,9 @@ public class GameManager : MonoBehaviour
                 item.Startt();
 
             }
-        }
+
+            Invoke("SocketControl", 5f);
+    }
 
         public void TheLineisOver()
         {
@@ -245,7 +246,7 @@ public class GameManager : MonoBehaviour
 
         if (!timeStart)
             {
-                Invoke("SocketControl", .5f);
+                Invoke("SocketControl", 2f);
                 timeStart = true;
             }
 
