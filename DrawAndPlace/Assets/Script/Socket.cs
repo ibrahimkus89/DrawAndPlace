@@ -53,7 +53,7 @@ public class Socket : MonoBehaviour
             //Debug.Log("doðru renk" +_socketColor);
             _yuvOt =true;
             _yuvPosition = _arrivalYuv.transform.position;
-            Generalmanagement._GameManager.SocketOtr();
+            Generalmanagement._GameManager.SocketOtr(transform.position);
 
             //Optional
             //GetComponent<CircleCollider2D>().enabled = false;
@@ -64,7 +64,7 @@ public class Socket : MonoBehaviour
             
             _place = false;
             Generalmanagement._GameManager.Lost();
-            Generalmanagement._GameManager.PlaySound(3);
+            Generalmanagement._GameManager.SocketCollision(transform.position);
 
         }
         else
@@ -73,7 +73,7 @@ public class Socket : MonoBehaviour
             {
                 _place = false;
                  Generalmanagement._GameManager.Lost();
-                 Generalmanagement._GameManager.PlaySound(3);
+                 Generalmanagement._GameManager.SocketCollision(transform.position);
 
 
             }

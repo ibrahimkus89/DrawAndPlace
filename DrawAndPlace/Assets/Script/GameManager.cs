@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
         [SerializeField] private AudioSource[] _Sounds;
         [SerializeField] private Image[] _ButtonImages;
         [SerializeField] private Sprite[] _SpriteObjects;
+        [SerializeField] private ParticleSystem[] _CollisionEffects;
+        private int _CollisionEffectsIndex;
+        [SerializeField] private ParticleSystem[] _OtrEffects;
+        private int _OtrEffectsIndex;
+        [SerializeField] private ParticleSystem _WinEffect;
         [SerializeField] private TextMeshProUGUI _scoreText;
 
         [Header("---AUTO LEVEL")]
@@ -97,7 +102,8 @@ public class GameManager : MonoBehaviour
 
        void Win()
         {
-            
+            _WinEffect.gameObject.SetActive(true);
+            _WinEffect.Play();
             TurnOnPanel(1);
             PlaySound(2);
             MemoryManager.SaveDataInt("Level",_sceneIndex+1);
@@ -219,11 +225,25 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        public void SocketOtr()
+        public void SocketOtr(Vector2 SocketPosition)
         {
             PlaySound(4);
             _totalGirSocketNum--;
-            if (!timeStart)
+
+            _OtrEffects[_OtrEffectsIndex].gameObject.SetActive(true);
+            _OtrEffects[_OtrEffectsIndex].transform.position = SocketPosition;
+            _OtrEffects[_OtrEffectsIndex].Play();
+            _OtrEffectsIndex++;
+
+            if (_OtrEffects.Length - 1 == _OtrEffectsIndex)
+            {
+                _OtrEffectsIndex = 0;
+            }
+
+
+
+
+        if (!timeStart)
             {
                 Invoke("SocketControl", .5f);
                 timeStart = true;
@@ -284,4 +304,18 @@ public class GameManager : MonoBehaviour
                 }
             }
     }
+
+        public void SocketCollision(Vector2 SocketPosition)
+        {
+            PlaySound(3);
+            _CollisionEffects[_CollisionEffectsIndex].gameObject.SetActive(true);
+            _CollisionEffects[_CollisionEffectsIndex].transform.position = SocketPosition;
+            _CollisionEffects[_CollisionEffectsIndex].Play();
+            _CollisionEffectsIndex++;
+
+            if (_CollisionEffects.Length-1==_CollisionEffectsIndex)
+            {
+                _CollisionEffectsIndex = 0;
+            }
+        }
     }
